@@ -12,25 +12,27 @@ const addLocation=asyncHandler(async(req,res)=>{
 
 })
 const addUpvote=asyncHandler(async(req,res)=>{
+    const {position}=req.body;
     const votes = await Location.findOneAndUpdate(
         { position },   // Query to find the location by 'position'
         { $inc: { upvotes: 1 } },  // Increment the 'upvotes' field by 1
         { new: true }  // Return the updated document
       )
+      console.log(votes)
       try {
         const result = await Location.aggregate([
           {
             $group: {
               _id: null,  // We are not grouping by any field, so use null
-              averageUpvotes: { $avg: "$upvotes" },  // Calculate the average of 'upvotes'
-              averageDownvotes: { $avg: "$downvotes" }  // Calculate the average of 'downvotes'
+              sumUpVotes: { $sum: "$upvotes" },  // Calculate the average of 'upvotes'
+              sumDownVotes: { $sum: "$downvotes" }  // Calculate the average of 'downvotes'
             }
           }
         ]);
-        const avg = result.averageDownvotes+averageUpvotes/2
+        const avg = result.sumDownVotes+result.sumUpVotes/2;
         
         const averages = result.length > 0 ? avg : 0;
-        const opacity = votes.upvotes/averages;
+        const opacity = votes.upvotes-votes.downvotes/averages;
 
 
 
