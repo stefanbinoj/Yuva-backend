@@ -11,10 +11,27 @@ const addLocation=asyncHandler(async(req,res)=>{
 
 
 })
-
+const addUpvote=asyncHandler(async(req,res)=>{
+    const votes = await Location.findOneAndUpdate(
+        { position },   // Query to find the location by 'position'
+        { $inc: { upvotes: 1 } },  // Increment the 'upvotes' field by 1
+        { new: true }  // Return the updated document
+      )
+      
+      res.status(200).json(updatedLocation);
+})
+const addDownvote=asyncHandler(async(req,res)=>{
+    const votes = await Location.findOneAndUpdate(
+        { position },   // Query to find the location by 'position'
+        { $inc: { downvotes: -1 } },  // Increment the 'upvotes' field by 1
+        { new: true }  // Return the updated document
+      )
+      
+      res.status(200).json(updatedLocation);
+})
 const getLocation = asyncHandler(async(req,res)=>{
     const location = await Location.find()
     res.json(location)
 })
 
-module.exports={addLocation,getLocation}
+module.exports={addLocation,getLocation,addUpvote,addDownvote}
