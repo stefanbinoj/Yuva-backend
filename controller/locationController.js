@@ -6,9 +6,8 @@ const addLocation=asyncHandler(async(req,res)=>{
     const{position}=req.body;
     const loc = await Location.create({
         position,
-        user_id:req.user.id
     })
-    res.status(201).json(contact)
+    res.status(201).json(loc)
 
 
 })
