@@ -15,6 +15,7 @@ app.use('/sos/get-numbers',require('./routes/EmergencyNumber'))
 app.use('/location', require('./routes/AddLocation'))
 app.use('/sos/upload',require('./routes/AddAudio'))
 app.use("/users",require('./routes/userRoutes'))
+app.use('/feed',require('./routes/FeedSection'))
 
 
 
