@@ -11,7 +11,10 @@ app.use(express.json())
 
 app.use('/sos',require('./routes/EmergencyNumber'))
 app.use('/add-location', require('./routes/AddLocation'))
+app.use('/get-location', require('./routes/AddLocation'))
 app.use('/upload',require('./routes/AddAudio'))
+
+
 
 app.use(errorHandler)
 
