@@ -9,7 +9,8 @@ const PORT=process.env.PORT;
 
 app.use(express.json())
 
-
+app.use('/sos/emergency-number',require('./routes/EmergencyNumber'))
+app.use('/add-location', require('./routes/AddLocation'))
 
 app.use(errorHandler)
 
