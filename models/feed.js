@@ -24,10 +24,20 @@ const feedSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  category: {
+    type: String,
+    enum: ['help', 'urgent', 'general', 'question'], // Define your categories here
+    default:'help'
+    
+  },
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  }, 
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }]
 });
 
 module.exports = mongoose.model('Feed', feedSchema);
