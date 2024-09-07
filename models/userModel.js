@@ -13,6 +13,9 @@ const userSchema=mongoose.Schema({
     password:{
         type:String,
         required:[true,"Please add an password"]
+    },
+    position:{
+        type:String
     }
 },{
     timestamps:true

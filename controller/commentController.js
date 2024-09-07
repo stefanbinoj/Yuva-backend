@@ -34,8 +34,22 @@ const getComments = async (req, res) => {
     res.status(500).json({ message: 'Error fetching comments', error: error.message });
   }
 };
+const acceptComment = async(req, res)=>{
+  const {comment_id}=req.body;
+  try {
+    const updatedComment = await Comment.findByIdAndUpdate(
+        comment_id,   // Query to find the comment by '_id'
+        { accepted: true },  // Update the 'accepted' field to true
+        { new: true }  // Return the updated document
+    );
+    res.status(200).json(updatedComment);
+  } catch (error) {
+    res.status(500).json({ message: 'Error accepting comment', error: error.message });
+  }
+}
 
 module.exports = {
   postComment,
-  getComments
+  getComments,
+  acceptComment
 };
