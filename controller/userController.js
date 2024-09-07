@@ -67,4 +67,9 @@ const getUser=asyncHandler(async (req,res)=>{
     res.json(user)
 })
 
-module.exports={registerUser,loginUser,getUser}
+const getUserDetails=asyncHandler(async (req,res)=>{
+    const user=await User.findById(req.params.id)
+    res.json(user)
+})
+
+module.exports={registerUser,loginUser,getUser,getUserDetails}
