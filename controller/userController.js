@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken")
 const User=require("../models/userModel")
 
 const registerUser=asyncHandler(async (req,res)=>{
-    const{phone,password,position}=req.body
+    const{phone,password,position,name}=req.body
     if(! phone || !password){
         res.status(400)
         throw new Error("All fields are mandatory")
@@ -22,7 +22,8 @@ const registerUser=asyncHandler(async (req,res)=>{
     const user = new User({
         phone:phone,
         password:hashedPassword,
-        position
+        position,
+        name
     })
     console.log("usr created : ",user)
     if(user){

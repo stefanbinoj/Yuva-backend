@@ -16,6 +16,10 @@ const userSchema=mongoose.Schema({
     },
     position:{
         type:String
+    },
+    name:{
+        type:String,
+        
     }
 },{
     timestamps:true
